@@ -19,6 +19,7 @@ tab1, tab2, tab3 = st.tabs(['Main','Game','Race'])
 with tab1:
     st.write("Table of Counts")
     table = table_of_counts(data)
+    st.dataframe(table)
 
 with tab2:
     st.write("tab2")
