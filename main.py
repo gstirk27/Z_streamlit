@@ -5,11 +5,17 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from my_plots import *
 import streamlit as st
+import requests
+from io import StringIO
 
 @st.cache_data
-def get_data():
-    data = pd.read_csv('zelda_characters.csv')
-    return data
+def get_data():  
+    url = 'https://raw.githubusercontent.com/gstirk/Z-streamlit/main/zelda_characters.csv'  
+    response = requests.get(url)
+    return pd.read_csv(StringIO(response.text))  
+#def get_data():
+#    data = pd.read_csv('zelda_characters.csv')
+#    return data
 
 df = get_data()
 
