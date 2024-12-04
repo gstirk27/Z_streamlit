@@ -20,6 +20,7 @@ def get_data():
 #    return data
 
 df = get_data()
+#st.write(df)
 
 st.title("Census of Hyrule")
 
@@ -27,12 +28,19 @@ tab1, tab2, tab3 = st.tabs(['Main','Game','Race'])
 
 with tab1:
     st.write("Table of Counts")
-    table = table_of_counts(df['race'],df['title'])
+    numgames = st.number_input("Only include games that have _____ many NPCs listed",5,280)
+    numraces = st.number_input("Only include races that have more than ____ entries",5,300)
+    newdf = shrink_table(df,numgames,numraces)
+    table = table_of_counts(newdf['race'],newdf['title'])
     st.dataframe(table)
 
 with tab2:
-    games = st.multiselect("Pick a Game to look at:", df['title'].unique())
+    nice = shrink_table(df,5,5)
+    games = st.multiselect("Pick games to look at:", nice['title'].unique())
+    gamestable = only_these_games(nice,games)
+    table2 = table_of_counts(gamestable)
+    st.dataframe(table2)
 
 
 with tab3:
-    race = st.multiselect("Pick a fantasy race to look at:", df['race'].unique())
+    race = st.multiselect("Pick some fantasy races to look at:", df['race'].unique())

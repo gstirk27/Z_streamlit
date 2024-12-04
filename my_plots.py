@@ -8,3 +8,21 @@ def table_of_counts(race,title):
     tablecounts = pd.crosstab(race, title, margins=True, margins_name="Total")
     return tablecounts
 
+def pie_chart(variable) :
+    chart = variable.value_counts().plot.pie(figsize=(7, 7), autopct='%1.1f%%')
+    return chart
+
+def shrink_table(df, numgames, numraces) :
+    tcg = df['title'].value_counts()
+    tc1 = tcg[tcg > numgames].index
+    smallerg = df[df['title'].isin(tc1)]
+
+    tcr = df['race'].value_counts()
+    tc2 = tcr[tcr > numraces].index
+    smaller = smallerg[smallerg['race'].isin(tc2)]
+    return smaller
+
+def only_these_games(df,games) :
+    newdf = df[df['title'].isin(games)]
+    return newdf
+
