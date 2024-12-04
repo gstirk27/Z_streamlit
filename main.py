@@ -22,6 +22,7 @@ def get_data():
 df = get_data()
 #st.write(df)
 df.drop(df[df['title'] == 'Freshly-Picked Tingle\'s Rosy Rupeeland'].index, inplace=True)
+df.drop(df[df['race'] == ' '].index, inplace=True)
 
 st.title("Census of Hyrule")
 
@@ -34,10 +35,10 @@ with tab1:
     newdf = shrink_table(df,numgames,numraces)
     table = table_of_counts(newdf['race'],newdf['title'])
     st.dataframe(table)
-    #fig1, ax1 = pie_chart(newdf['race'].value_counts())
     fig1, ax1 = plt.subplots()
-    labels = newdf['race'].unique()
+    labels = newdf['race'].value_counts().index.tolist()
     ax1.pie(newdf['race'].value_counts(),labels = labels,labeldistance=1.5,pctdistance=1.2,autopct='%1.1f%%')
+    ax1.set_title("Demographics of Hyrule",loc='right')
     st.pyplot(fig1)
 
 with tab2:
