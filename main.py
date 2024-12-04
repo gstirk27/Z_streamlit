@@ -10,7 +10,7 @@ from io import StringIO
 
 @st.cache_data
 def get_data():  
-    url = 'https://raw.githubusercontent.com/gstirk/Z-streamlit/main/zelda_characters.csv'  
+    url = 'https://raw.githubusercontent.com/gstirk27/Z_streamlit/refs/heads/main/zelda_characters.csv'  
     response = requests.get(url)
     return pd.read_csv(StringIO(response.text))  
 #def get_data():
@@ -25,7 +25,7 @@ tab1, tab2, tab3 = st.tabs(['Main','Game','Race'])
 
 with tab1:
     st.write("Table of Counts")
-    table = table_of_counts(df)
+    table = table_of_counts(df['race'],df['title'])
     st.dataframe(table)
 
 with tab2:
