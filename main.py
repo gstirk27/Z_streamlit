@@ -12,7 +12,9 @@ from io import StringIO
 def get_data():  
     url = 'https://raw.githubusercontent.com/gstirk27/Z_streamlit/refs/heads/main/zelda_characters.csv'  
     response = requests.get(url)
-    return pd.read_csv(StringIO(response.text))  
+    asdf = pd.read_csv(StringIO(response.text),header=1)
+    asdf.drop(asdf.tail(1).index,inplace=True)  
+    return asdf
 #def get_data():
 #    data = pd.read_csv('zelda_characters.csv')
 #    return data
