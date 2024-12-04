@@ -9,8 +9,12 @@ from io import BytesIO
 from my_plots import *
 import streamlit as st
 
-#@st.cache_data
-data = pd.read_csv('zelda_characters.csv')
+@st.cache_data
+def get_data():
+    data = pd.read_csv('zelda_characters.csv')
+    return data
+
+df = get_data()
 
 st.title("Census of Hyrule")
 
@@ -22,8 +26,8 @@ with tab1:
     #st.dataframe(table)
 
 with tab2:
-    games = st.multiselect("Pick a Game to look at:", data['title'].unique())
+    games = st.multiselect("Pick a Game to look at:", df['title'].unique())
 
 
 with tab3:
-    race = st.multiselect("Pick a fantasy race to look at:", data['race'].unique())
+    race = st.multiselect("Pick a fantasy race to look at:", df['race'].unique())
