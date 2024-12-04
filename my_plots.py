@@ -4,6 +4,7 @@ from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def table_of_counts(df):
-    tablecounts = pd.crosstab(df['race'], df['title'], margins=True, margins_name="Total")
+def table_of_counts(race,title):
+    tablecounts = pd.crosstab(race, title, margins=True, margins_name="Total")
     return tablecounts
+
