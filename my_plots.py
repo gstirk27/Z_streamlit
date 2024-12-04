@@ -9,8 +9,10 @@ def table_of_counts(race,title):
     return tablecounts
 
 def pie_chart(variable) :
-    chart = variable.value_counts().plot.pie(figsize=(7, 7), autopct='%1.1f%%')
-    return chart
+    #chart = variable.value_counts().plot.pie(figsize=(7, 7), autopct='%1.1f%%')
+    fig1, ax1 = plt.subplots()
+    ax1.pie(variable, autopct='%1.1f%%')
+    return fig1, ax1
 
 def shrink_table(df, numgames, numraces) :
     tcg = df['title'].value_counts()
@@ -29,4 +31,6 @@ def only_these_games(df,games) :
 def only_these_races(df,race) :
     newdf = df[df['race'].isin(race)]
     return newdf
+
+
 

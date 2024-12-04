@@ -34,6 +34,11 @@ with tab1:
     newdf = shrink_table(df,numgames,numraces)
     table = table_of_counts(newdf['race'],newdf['title'])
     st.dataframe(table)
+    #fig1, ax1 = pie_chart(newdf['race'].value_counts())
+    fig1, ax1 = plt.subplots()
+    labels = newdf['race'].unique()
+    ax1.pie(newdf['race'].value_counts(),labels = labels,labeldistance=1.5,pctdistance=1.2,autopct='%1.1f%%')
+    st.pyplot(fig1)
 
 with tab2:
     nice = shrink_table(df,5,5)
