@@ -1,11 +1,8 @@
 import pandas as pd
-import zipfile
 import plotly.express as px
 import matplotlib.pyplot as plt
-import requests
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from io import BytesIO
 from my_plots import *
 import streamlit as st
 
@@ -22,8 +19,8 @@ tab1, tab2, tab3 = st.tabs(['Main','Game','Race'])
 
 with tab1:
     st.write("Table of Counts")
-    #table = table_of_counts(data)
-    #st.dataframe(table)
+    table = table_of_counts(df)
+    st.dataframe(table)
 
 with tab2:
     games = st.multiselect("Pick a Game to look at:", df['title'].unique())
