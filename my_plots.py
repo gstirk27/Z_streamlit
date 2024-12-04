@@ -26,3 +26,7 @@ def only_these_games(df,games) :
     newdf = df[df['title'].isin(games)]
     return newdf
 
+def only_these_races(df,race) :
+    newdf = df[df['race'].isin(race)]
+    return newdf
+

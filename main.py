@@ -21,6 +21,7 @@ def get_data():
 
 df = get_data()
 #st.write(df)
+df.drop(df[df['title'] == 'Freshly-Picked Tingle\'s Rosy Rupeeland'].index, inplace=True)
 
 st.title("Census of Hyrule")
 
@@ -38,9 +39,13 @@ with tab2:
     nice = shrink_table(df,5,5)
     games = st.multiselect("Pick games to look at:", nice['title'].unique())
     gamestable = only_these_games(nice,games)
-    table2 = table_of_counts(gamestable)
+    table2 = table_of_counts(gamestable['race'],gamestable['title'])
     st.dataframe(table2)
 
 
 with tab3:
-    race = st.multiselect("Pick some fantasy races to look at:", df['race'].unique())
+    nicer = shrink_table(df,5,5)
+    race = st.multiselect("Pick some fantasy races to look at:", nicer['race'].unique())
+    racetable = only_these_races(nicer,race)
+    table3 = table_of_counts(racetable['title'],racetable['race'])
+    st.dataframe(table3)
