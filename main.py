@@ -29,25 +29,27 @@ st.title("Census of Hyrule")
 tab1, tab2, tab3 = st.tabs(['Main','Game','Race'])
 
 with tab1:
-    st.write("Table of Counts")
+    st.subheader("Table of Counts")
     numgames = st.number_input("Only include games that have _____ many NPCs listed",5,280)
     numraces = st.number_input("Only include races that have more than ____ entries",5,300)
     newdf = shrink_table(df,numgames,numraces)
     table = table_of_counts(newdf['race'],newdf['title'])
     st.dataframe(table)
 
+    st.subheader("Demographics (Races) of Hyrule")
+    st.write(f"These are the proportions of the different races of Hyrule amongst all the games that have more than {numgames} NPCs and {numraces} people listed as that race.")
     fig1, ax1 = plt.subplots()
     labels = newdf['race'].value_counts().index.tolist()
     ax1.pie(newdf['race'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
     ax1.legend(labels,fontsize=5)
-    ax1.set_title("Demographics (Races) of Hyrule",loc='left')
     st.pyplot(fig1)
-
+ 
+    st.subheader("Characters in the Legend of Zelda games")
+    st.write(f"These are the proportions of NPCs in each game with more than {numgames} NPCs and {numraces} in each race.")
     fig2, ax2 = plt.subplots()
     labels = newdf['title'].value_counts().index.tolist()
     ax2.pie(newdf['title'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
     ax2.legend(labels,fontsize=4,loc='upper left')
-    ax2.set_title("Characters in the Legend of Zelda games",loc='left')
     st.pyplot(fig2)
 
 with tab2:
@@ -64,3 +66,11 @@ with tab3:
     racetable = only_these_races(nicer,race)
     table3 = table_of_counts(racetable['title'],racetable['race'])
     st.dataframe(table3)
+
+    st.subheader("Demographics (Races) of Hyrule")
+    fig1, ax1 = plt.subplots()
+    labels = racetable['race'].value_counts().index.tolist()
+    ax1.pie(racetable['race'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
+    ax1.legend(labels,fontsize=5)
+    #ax1.set_title("Demographics (Races) of Hyrule",loc='left')
+    st.pyplot(fig1)
