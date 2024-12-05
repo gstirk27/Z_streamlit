@@ -75,7 +75,7 @@ with tab3:
     race = st.multiselect("Pick some fantasy races to look at:", nicer['race'].unique())
     racetable = only_these_races(nicer,race)
     table3 = table_of_counts(racetable['title'],racetable['race'])
-    #st.write("Double-click on the game title to see the full name")
+    st.write("If the game titles don't expand, double-click on the square to see the full name")
     st.dataframe(table3)
 
     st.subheader("Demographics (Races) of Hyrule")
