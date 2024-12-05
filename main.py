@@ -35,11 +35,20 @@ with tab1:
     newdf = shrink_table(df,numgames,numraces)
     table = table_of_counts(newdf['race'],newdf['title'])
     st.dataframe(table)
+
     fig1, ax1 = plt.subplots()
     labels = newdf['race'].value_counts().index.tolist()
-    ax1.pie(newdf['race'].value_counts(),labels = labels,labeldistance=1.5,pctdistance=1.2,autopct='%1.1f%%')
-    ax1.set_title("Demographics of Hyrule",loc='right')
+    ax1.pie(newdf['race'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
+    ax1.legend(labels,fontsize=5)
+    ax1.set_title("Demographics (Races) of Hyrule",loc='left')
     st.pyplot(fig1)
+
+    fig2, ax2 = plt.subplots()
+    labels = newdf['title'].value_counts().index.tolist()
+    ax2.pie(newdf['title'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
+    ax2.legend(labels,fontsize=4,loc='upper left')
+    ax2.set_title("Characters in the Legend of Zelda games",loc='left')
+    st.pyplot(fig2)
 
 with tab2:
     nice = shrink_table(df,5,5)
