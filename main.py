@@ -62,7 +62,7 @@ with tab2:
     st.dataframe(table2)
 
     st.subheader("Characters in the Legend of Zelda games")
-    #st.write(f"These are the proportions of NPCs in each game with more than {numgames} NPCs and {numraces} in each race.")
+    st.write("This chart shows how many characters (of all races) feature in all the games specified above.")
     fig2, ax2 = plt.subplots()
     labels = gamestable['title'].value_counts().index.tolist()
     ax2.pie(gamestable['title'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
@@ -75,10 +75,11 @@ with tab3:
     race = st.multiselect("Pick some fantasy races to look at:", nicer['race'].unique())
     racetable = only_these_races(nicer,race)
     table3 = table_of_counts(racetable['title'],racetable['race'])
-    st.write("If the game titles don't expand, double-click on the square to see the full name")
+    st.write("If the game titles don't expand, double-click on the square to see the full name.")
     st.dataframe(table3)
 
     st.subheader("Demographics (Races) of Hyrule")
+    st.write("This chart shows the proportion of each race selected above across all the games in the Legend of Zelda franchise.")
     fig1, ax1 = plt.subplots()
     labels = racetable['race'].value_counts().index.tolist()
     ax1.pie(racetable['race'].value_counts(),pctdistance=1.2,autopct='%1.1f%%',)
